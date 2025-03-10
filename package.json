@@ -19,5 +19,6 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.11"
   },
-  "prettier": "@mancuoj/prettier-config"
+  "prettier": "@mancuoj/prettier-config",
+  "packageManager": "yarn@4.7.0"
 }
