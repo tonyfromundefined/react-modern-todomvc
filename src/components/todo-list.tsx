@@ -1,21 +1,21 @@
-import { useTodos, useVisibility } from './todo-provider'
-import TodoToggle from './todo-toggle'
-import TodoItem from './todo-item'
+import TodoItem from "./todo-item";
+import { useTodos, useVisibility } from "./todo-provider";
+import TodoToggle from "./todo-toggle";
 
 export default function TodoList() {
-  const { todos } = useTodos()
-  const { visibility } = useVisibility()
+  const { todos } = useTodos();
+  const { visibility } = useVisibility();
 
   const filteredTodos = todos.filter((todo) => {
     switch (visibility) {
-      case 'active':
-        return !todo.completed
-      case 'completed':
-        return todo.completed
+      case "active":
+        return !todo.completed;
+      case "completed":
+        return todo.completed;
       default:
-        return true
+        return true;
     }
-  })
+  });
 
   return (
     todos.length > 0 && (
@@ -28,5 +28,5 @@ export default function TodoList() {
         </ul>
       </main>
     )
-  )
+  );
 }

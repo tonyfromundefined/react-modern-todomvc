@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "format": "prettier --cache --write ."
+    "format": "biome check --fix --unsafe"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -11,14 +11,12 @@
     "ts-clsx": "^2.4.1"
   },
   "devDependencies": {
-    "@mancuoj/prettier-config": "^0.2.0",
+    "@biomejs/biome": "^1.9.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
-    "prettier": "^3.2.5",
     "typescript": "^5.4.5",
     "vite": "^5.2.11"
   },
-  "prettier": "@mancuoj/prettier-config",
   "packageManager": "yarn@4.7.0"
 }

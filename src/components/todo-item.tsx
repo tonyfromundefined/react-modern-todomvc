@@ -1,38 +1,38 @@
-import { clsx } from 'ts-clsx'
-import { Todo } from '../types'
-import { useTodos } from './todo-provider'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from "react";
+import { clsx } from "ts-clsx";
+import type { Todo } from "../types";
+import { useTodos } from "./todo-provider";
 
 export default function TodoItem({ todo }: { todo: Todo }) {
-  const { dispatch } = useTodos()
-  const [isEditing, setIsEditing] = useState(false)
-  const [editedTitle, setEditedTitle] = useState(todo.title)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const { dispatch } = useTodos();
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(todo.title);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function handleEdit() {
-    const title = editedTitle.trim()
+    const title = editedTitle.trim();
     if (!title) {
-      dispatch({ type: 'remove', id: todo.id })
+      dispatch({ type: "remove", id: todo.id });
     } else {
-      dispatch({ type: 'edit', todo: { ...todo, title } })
+      dispatch({ type: "edit", todo: { ...todo, title } });
     }
-    setIsEditing(false)
+    setIsEditing(false);
   }
 
   function handleCancelEdit() {
-    setEditedTitle(todo.title)
-    setIsEditing(false)
+    setEditedTitle(todo.title);
+    setIsEditing(false);
   }
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
-  }, [isEditing])
+  }, [isEditing]);
 
   return (
     <li
-      className={clsx('todo', {
+      className={clsx("todo", {
         completed: todo.completed,
         editing: isEditing,
       })}
@@ -44,13 +44,18 @@ export default function TodoItem({ todo }: { todo: Todo }) {
           checked={todo.completed}
           onChange={(e) => {
             dispatch({
-              type: 'edit',
+              type: "edit",
               todo: { ...todo, completed: e.target.checked },
-            })
+            });
           }}
         />
+        {/* biome-ignore lint/a11y/noLabelWithoutControl: */}
         <label onDoubleClick={() => setIsEditing(true)}>{todo.title}</label>
-        <button className="destroy" onClick={() => dispatch({ type: 'remove', id: todo.id })}></button>
+        <button
+          type="button"
+          className="destroy"
+          onClick={() => dispatch({ type: "remove", id: todo.id })}
+        />
       </div>
       {isEditing && (
         <input
@@ -60,11 +65,11 @@ export default function TodoItem({ todo }: { todo: Todo }) {
           onChange={(e) => setEditedTitle(e.target.value)}
           onBlur={handleEdit}
           onKeyUp={(e) => {
-            if (e.key === 'Enter') handleEdit()
-            else if (e.key === 'Escape') handleCancelEdit()
+            if (e.key === "Enter") handleEdit();
+            else if (e.key === "Escape") handleCancelEdit();
           }}
         />
       )}
     </li>
-  )
+  );
 }
