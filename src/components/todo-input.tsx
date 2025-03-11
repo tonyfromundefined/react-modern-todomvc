@@ -7,6 +7,7 @@ export default function TodoInput() {
 
   function handleAdd() {
     const title = text.trim();
+
     if (title) {
       dispatch({ type: "add", title });
       setText("");
